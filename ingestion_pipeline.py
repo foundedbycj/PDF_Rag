@@ -7,43 +7,54 @@ import glob
 load_dotenv()
 from pypdf import PdfReader
 
+from langchain_core.documents import Document
 
 def extract_pdf(file):
-    text = ''
+    
 
     reader = PdfReader(file)
-    for page in   reader.pages:
+    text   = ''
+    for page in reader.pages:
 
       
-       text = text + page.extract_text()
+        text = text + page.extract_text()
     return text
 
 
 
-def text_splitter(doc,chunks=600,chunk_overlap=2):
+def text_splitter(text,chunks=600,chunk_overlap=2):
     splitter = RecursiveCharacterTextSplitter(
-        chunk=chunks,
+        chunk_size=chunks,
         chunk_overlap= chunk_overlap
     )
-    return splitter.split_text(doc)
+
+    document = Document(page_content=text)
+    return splitter.split_documents([document])
 
 
-def vector_store(persist_directory = './database_dir'): # enter whatever persist directory you need
+def create_vector_store(chunk,persist_directory = 'database_dir'): # enter whatever persist directory you need
 
-    vector_model = OpenAIEmbeddings(vector_model='text-embedding-3-small')
-    create_vector_store = Chroma(
-       collection_name= 'embeddings',
+    embedding_model = OpenAIEmbeddings(model='text-embedding-3-small')
+    vector_store = Chroma.from_documents(
+       documents  = chunk,
+       embedding  = embedding_model,   
        persist_directory = persist_directory,
-       collection_metadata='hn'
+       collection_metadata= {'hnsw:space':'cosine'})
+    
+    return vector_store
 
 
-    )
+    
+    
 
 
+def integrate (file):
 
-
-def integrate ():
-
-    text =extract_pdf('./psychology_of_money.pdf')#write your own file name
+    text =extract_pdf(file)#write your own file name
     chunks = text_splitter(text)
-    vector_d = vector_store ()
+    vector_store = create_vector_store(chunks)
+    return vector_store
+
+
+
+integrate('docs/1706.03762v7.pdf')
