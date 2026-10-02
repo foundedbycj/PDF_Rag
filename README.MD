@@ -9,9 +9,17 @@
 <ol> 
 <li> Creating <code>ingestion pipeline </code> to convert the pdf textual data into vectors in a vector DB.</li>
 <li> Creating <code>retrieval pipeline </code> to convert user queries into a vectors and apply the search rule </li>
+<li> Creating <code>RAG interface </code> to make a visual interface for the RAG Agent to be used
 <li> Integrating them together to form a RAG </li>
 
 </ol>
 
 
 # NOTE (It is fully local rag and is not deployed anywhere)
+
+<H1 > Tech-stack/Tools used </h1>
+<ul>
+<li> ChromaDB
+<li> LangChain
+<li> OpenAI
+<li> Streamlit
