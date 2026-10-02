@@ -9,6 +9,9 @@ from pypdf import PdfReader
 
 from langchain_core.documents import Document
 
+
+
+#Extract the textual contents of pdf
 def extract_pdf(file):
     
 
@@ -21,7 +24,7 @@ def extract_pdf(file):
     return text
 
 
-
+# Split the text into its respective chunks to make the retrieval process more contextual and easier
 def text_splitter(text,chunks=600,chunk_overlap=2):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunks,
@@ -47,7 +50,7 @@ def create_vector_store(chunk,persist_directory = 'database_dir'): # enter whate
     
     
 
-
+# compile up all of the pieces
 def integrate (file):
 
     text =extract_pdf(file)#write your own file name
@@ -57,4 +60,6 @@ def integrate (file):
 
 
 
-integrate('docs/1706.03762v7.pdf')
+integrate('docs/1706.03762v7.pdf') 
+
+integrate('YOUR-PDF-NAME')# add your pdf path

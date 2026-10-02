@@ -10,4 +10,8 @@
 <li> Creating <code>ingestion pipeline </code> to convert the pdf textual data into vectors in a vector DB.</li>
 <li> Creating <code>retrieval pipeline </code> to convert user queries into a vectors and apply the search rule </li>
 <li> Integrating them together to form a RAG </li>
+
 </ol>
+
+
+# NOTE (It is fully local rag and is note deployed anywhere)

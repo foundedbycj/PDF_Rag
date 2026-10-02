@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage,AIMessage
 load_dotenv()
+import streamlit as st
+
 
 
 # This is the exact same function as the retrieval pipeline , its just an extension of it by adding : Chat_history/memory 
@@ -35,6 +37,11 @@ rules = """1 ) DON'T Use vague sources,
 6 ) BE confident  in your answers"""
 
 
+### STREAMLIT CODE
+
+st.title('PDF Summariser')
+st.text('hi dude')
+
 
 while True: #Creating a chat loop
 
@@ -60,3 +67,6 @@ while True: #Creating a chat loop
     chat_history.append(HumanMessage(content=query))
     chat_history.append(AIMessage(content=response.content))
     
+
+
+
