@@ -14,4 +14,4 @@
 </ol>
 
 
-# NOTE (It is fully local rag and is note deployed anywhere)
+# NOTE (It is fully local rag and is not deployed anywhere)
